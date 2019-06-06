@@ -1,0 +1,20 @@
+This tool is to estimate empty droplets from scRNA-seq data
+Protocol:Droplet-based protocol
+Paper: EmptyDrops: distinguishing cells from empty droplets in droplet-based single-cell RNA sequencing data
+available: https://bioconductor.org/packages/DropletUtils 
+
+my 2cents: 
+Although the #non-empty droplets estimated by EmptyDrops is pretty close to cellRanger (tested on a 4k PBMCs from 10x Genomics by myself, 
+dataset: https://support.10xgenomics.com/single-cell-gene-expression/datasets/2.1.0/pbmc4k), the overlap of this method and cellRanger
+differs greatly. Setting seed at 12345, (1) about 8.5% of the droplets estimated as non-empty by cellRanger are estimated to be empty by EmptyDrops; 
+also (2) about the same proportion of the droplets estiamted as non-empty by EmptyDrops are estimated to be empty by cellRanger. 
+However, EmptyDrops have an additional functionality, adding a threshold of the UMIs for estimating empty droplets. This will 
+eliminate discrepency in (1), but (maybe) potentially worse (2) (have not tested out yet). 
+
+Just to look at the method itself: there potentially can be a very bad estimation when applying EmptyDrops on a scRNA-seq data where
+only one cell population is profiled (flow cytomery sorted cells then profiled). This is the drawback of the method itself, even though the
+method per se is reasonable. Getting a empirical distribution from whatever that comes from the one cell population scRNA-seq data, 
+the empirical multinomial distribution is sure to resemble the cell's actual expression. So the likelihood (of being empty) proposed 
+by the author of a non-empty droplet would still be super high, leading to high false positive.  (have not tested this out yet... should do) 
+
+ 
