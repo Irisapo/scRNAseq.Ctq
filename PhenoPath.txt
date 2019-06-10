@@ -1,0 +1,16 @@
+This tool(method) is to find the relative progression process of each individual along a biological process.
+Protocal/datatype: apply to a wide range of datasets, useful for any scRNA-seq protocal; can also be applyed on bulk RNA-seq data. Even though the paper does not specifically point out that this method can also be used on non-RNA seq data, it should be (at leastest methodologically speaking). 
+Availability: https://bioconductor.org/packages/release/bioc/html/phenopath.html 
+
+
+What I like about this method: conceptually simple. At its simplest, it is a Bayesian linear regression with interactions. That is, covariate-pseudotime
+interaction linear model. Covariates are phenotypic or environmental variables, revealing (biological) context of the data. Pseudotime is the latent variable 
+the model has to estimate, repsenting the relative progression process of each individual. The interaction is claimed to the novelty of this linear model, 
+saying that the (pseudo)time which can be affected by the covariates can cause the objects to evolve differently over (pseudo)time (which I have no doublt about).
+ 
+This method would aid finding interesting biological problems by not complicating the analysis process in a way that Bayesian approach make constraint when 
+there is not much to support that analyst's assumption and let the data itself to speak when necessary (by setting a weak/noninformative prior). 
+
+
+
+(Need to test it out by June 2019)
