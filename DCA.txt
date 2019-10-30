@@ -2,12 +2,20 @@ Single-cell RNA-seq denoising using a deep count autoencoder
 https://www.nature.com/articles/s41467-018-07931-2
 
 
-Method: neural network to estimate the 3 parameters of the Zero-inflated Negative Binomial (ZINB) distribution of scRNA data. The 3 parameters in the ZINB distribtion is, Pi (drop-out rate), mu (designated failure time / location parameter), theta (dispersion / success rate) 
+Method: neural network to estimate the 3 parameters of the Zero-inflated Negative Binomial (ZINB) distribution of scRNA data. 
+The 3 parameters in the ZINB distribtion is, Pi (drop-out rate), mu (designated failure time / location parameter), 
+theta (dispersion / success rate) 
 Notes: 
-  1) Three groups of layers are used in this neural network. 1st group of layers: encoder layers (to estimate these 3 parameters); 2nd group of layers: bottleneck layers (restricted to have only 2 neurons), can be viewed as their corresponding (dimensionality reduction) visualization method to see similarities between cells; 3rd group of layers: decoder layers. 
-  2) Normalization of scRNA count matrix X "center"s expression towards median expression of genes within each cell. [ N_(g,i) / sum(N_(*,i)) * median( {N_(*,i)} ), i is i-th cell, g is gene g ]. 
+  1) Three groups of layers are used in this neural network. 1st group of layers: encoder layers (to estimate these 3 parameters); 
+  2nd group of layers: bottleneck layers (restricted to have only 2 neurons), can be viewed as their corresponding (dimensionality reduction) visualization method to see similarities between cells; 
+  3rd group of layers: decoder layers. 
+  2) Normalization of scRNA count matrix X "center"s expression towards median expression of genes within each cell. 
+  [ N_(g,i) / sum(N_(*,i)) * median( {N_(*,i)} ), i is i-th cell, g is gene g ]. 
   3) Mini-batch stochastic gradient descent is used for optimization. 
-  4) The bottleneck group of layers to search hidden features of the cells, --> encoder group of layers to correct noise ( droupout zeros ), --> output corrects count matrix by inserting the mean of the NB distribution to original zeros, and to replace the original non-zero-expression. 
+  4) The bottleneck group of layers to search hidden features of the cells, 
+  --> encoder group of layers to correct noise ( droupout zeros ), 
+  --> output corrects count matrix by inserting the mean of the NB distribution to original zeros, 
+  and to replace the original non-zero-expression. 
 
 
 
