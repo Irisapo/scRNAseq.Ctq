@@ -1,0 +1,15 @@
+why RNA velocity should be expected to help analysis of cell development lineages???
+
+1. RNA velocity is just the first derivative of gene expression (in the ideal case. And I think there might be other reasons that contribute to RNA velocity, cell cycle etc.) 
+2. Development lineage's association with Gene expression does not promise its association with its derivative (RNA velocity). For example: 
+		(a) To simply put it, that I run faster does not mean this is a particular pattern of my acceleration. It can be constant, can be increasing/decrasing, and arbitrary... 
+		(b) Think about a restaurant at lunch time, the service a staff provides can be analogous to gene expression (as they both are only to fullfill an activity's requirement:
+						customers' dining needs in the restaurant, and cells' needs in the gene expression) 
+						The change (can be positive or negative) of the amount of work per minute for this staff resembles RNA velocity.
+								It's reasonable to think that a staff has a havier work load when there are more customers,
+								but it is unnatural to think the staff's work load **change** is directly linked to his/her work load...   
+						This work load change is mostly dominantedly affected by the speed of the change of the custmers numbers, which itself 
+						is affected by so many other reasons that have nothing to do with this staff.. 
+						(i.e., a variable x's derivatives really does not have to have any particular pattern associated with the pattern of x itself, it can though, it does not have to...)  
+
+
