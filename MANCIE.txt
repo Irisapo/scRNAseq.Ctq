@@ -8,7 +8,7 @@ The correlation is used to make adjustment:
 	correlation too large <--> use PCA 1st component of the matrix composed of these two rows
 	correlation in between <--> adjust the original value by the associated value in percentage (represented by correlation)
 
-Adjusted results is not making any trememdous change, both in a good and bad way.
+Adjusted results are not making any trememdous change, both in a good and bad way.
 (Making the very significant results more significant.)
 
 This method might be a good start for something really useful.
@@ -17,8 +17,9 @@ Simple enough to be built on.
 Notes: 
 	1.which one do you need to adjust? of the two matrices, which one should be reference or the adjusted?
 	  Since the adjustment is not symmetric.
+	  Although you can do both as described in the paper. I prefer to not to (twice of the bias).
 	2.correlation is not a good choice to measure concordance in some situations
-	  Especially when the data is compliated in a mysterious way... (Sparcity etc.) 
+	  Especially when the data is complicated in a mysterious way... (Sparsity etc.) 
 	3. Since it is using only row (feature) information
 	  Normalization cross samples is going to make huge impact on the adjustment
 
