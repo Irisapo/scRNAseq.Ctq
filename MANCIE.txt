@@ -1,1 +1,24 @@
 "Matrix Analysis and Normalization by Concordant Information Enhancement"
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4833864/pdf/ncomms11305.pdf 
+
+Interstingly, to correct batch effect (platform etc.) or to integrate two types of (similar) data, 
+the correction is measured within each row based on that row's reference in the 2nd matrix (associated matrix).
+The correlation is used to make adjustment: 
+	correlation too small <--> smaller than the cutoff value, keep the original value
+	correlation too large <--> use PCA 1st component of the matrix composed of these two rows
+	correlation in between <--> adjust the original value by the associated value in percentage (represented by correlation)
+
+Adjusted results is not making any trememdous change, both in a good and bad way.
+(Making the very significant results more significant.)
+
+This method might be a good start for something really useful.
+Simple enough to be built on.
+
+Notes: 
+	1.which one do you need to adjust? of the two matrices, which one should be reference or the adjusted?
+	  Since the adjustment is not symmetric.
+	2.correlation is not a good choice to measure concordance in some situations
+	  Especially when the data is compliated in a mysterious way... (Sparcity etc.) 
+	3. Since it is using only row (feature) information
+	  Normalization cross samples is going to make huge impact on the adjustment
+
