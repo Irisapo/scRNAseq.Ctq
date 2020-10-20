@@ -1,0 +1,58 @@
+Single-Cell Profiling Defines Transcriptomic Signatures Specific to Tumor-Reactive versus Virus-Responsive CD4+ T Cells
+https://pubmed.ncbi.nlm.nih.gov/31801070/
+Tile is obvious about one of the 2 findings..
+The analysis was thoroughly! explained. Glad I accidentally found this paper for scRNAseq analysis demonstration.
+
+Perform scRNAseq on 3 experiments (each with 2 relicates): 
+    1. solid tumor sample
+    2. virus infected sample
+    3. drainning lyph node (dLN) sample 
+to study CD4+ T-cells':
+    1.sub-celltype compositions
+    2. gene expression patterns
+and found:
+    1. tumor infiltrating CD4+ T-cells are different than viral-responsive CD4+ T-cells
+    2. tumor infiltrating CD4+ T-cells have variety among Th1-like cells, while
+       dLN CD4+ T-cells have Tfh-like cells but lack Th1-like cells.
+
+5 Steps in computational methods:
+  Step1: Pre-processing
+    1. CellRanger pre-processing & cell-calling
+    2. Data cleaning: 
+        remove (1) low-quality cells (with <500 genes), 
+               (2) doublets (since the cell-type resolution here is high, better remove doubles, even cells have already been sorted/purified during experiment)
+               (3) senescent cells (this I didn't know we need to remove, probably same rationale as removing dead cells)
+    3. Normalization remove sequencing depth effect)
+    4. log-transformation
+
+   Step2: Dimensionality Reduction (For visualization)
+     1. [Define highly variable genes]
+        [PCA]
+     2. Select PCs with permutation test (PCs that can separate highly vs non-highly variable genes)
+     3. Tsne on selected PCs
+
+   Step3: Clustering (Phenograph, graph based clustering method which is based on KNN)
+     1. Parameter tuning to find the best #clusters on each of the 6 (3 samples x 2 replicates) datasets 
+        (P.s., measurement is based on ratio of intra-cluster compactness & inter-cluster separation)
+     2. Filter out B cells (This might be because B cells and T cells they attach with each other when immune responses happen and hence hard to sort them out during experiment)
+     3. Back to Step 2, redo everything (Because PCA has to be redone and hence updates PCs, etc...)
+
+   Step4: Differential Gene Expression Analysis (Within each dataset, unless datasets have to be merged due to quality concern)
+     1. DE pick out genes on each cluster (one cluster vs the rest within dataset comparison)
+     2. Get FC fold change for each cluster
+     3. Pearson correlation of FC cross datasets
+
+   Step5: Robust Clustering Calling & Robust Population Comparison 
+     1. Hierarchical clustering (on clusters inferred above)
+     2. meta-clusters (Because clusters does not equal to cell-type, sometimes(of course depends on research interest) can be collapsed.)
+     3. [Find special genes in the meta-clusters defined before]: 
+        [Results consistent cross duplicates?] 
+        [organ/Tissue specific gene-expressions?] in meta-clusters  --> Back to findings 
+        [tumor/virus specific gene expressions?] in meta-clusters  --> Back to findings 
+
+
+
+From time to time I realize in hindsight how wide a time span covers learning a very simple concept for me......
+T-cells: CD8+ Tcells (related to MHC-I mainly kill cells)
+         CD4+ Tcells (related to MHC-II, mainly help B cells, also help CD8+ Tcells, and macrophages etc.. it helps a lot...)
+
