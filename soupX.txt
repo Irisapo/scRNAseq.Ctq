@@ -1,0 +1,24 @@
+SoupX removes ambient RNA contamination from droplet-based single-cell RNA sequencing data
+https://academic.oup.com/gigascience/article/9/12/giaa151/6049831
+
+The whole idea is to:
+1. use low-UMIs droplets to sum-up and normalize the gene-expression to be a background expression pool
+2. Select a set of genes that should only present in a subset cells from all the cells in the same experiment
+3. For cells having non-low-UMIs:
+	(a) Sum up the total number of transcripts in the cell across the selected genes
+	(2) (Assume) This total number of transcripts should theoretically follow the same distribution as background gene-expression 
+	(3) Then calculate a multiplier (termed as rho) based on this assumption. 
+	(4) This calculated multiplier indicates rho-times of the background distribution is enclosed in the droplet together with the cell's native mRNA
+	(5) Use the observed count minus this multiplier(pho) * UMIs-in-this-cell * probability-of-this-gene-in-the-background-gene-expression
+
+Caveats: 
+	1) Certainly choosing the set of genes have a large effect on final estimation.
+	2) The sequencing depth that varies mysteriously across genes is going to mess up estimation even more.
+
+A process to automatically selecting genes is also provided in the paper. The idea is to select genes with pre-described criteria. 
+But before this, they have to find those cells in which only a subset of the cells have a subset of the genes.
+The way to find those cells is kinda weird and does not makes sense to me (see the attached screenshot).
+It is weird in a way that they sum-up the p-values that come from the Poisson-null hypothesis constructed 
+on gene against background gene-expression; the summed-up p-values is compared with 0.05 for significance 
+of the cell being chosen to proceed...
+
